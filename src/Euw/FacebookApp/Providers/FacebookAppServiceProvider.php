@@ -11,7 +11,6 @@ class FacebookAppServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		dd("foo");
 //		$this->loadViewsFrom( __DIR__ . '/path/to/views', 'courier' );
 
 		include __DIR__ . '/../../routes.php';
