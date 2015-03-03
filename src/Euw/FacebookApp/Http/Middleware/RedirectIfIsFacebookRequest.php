@@ -1,0 +1,64 @@
+<?php namespace Euw\FacebookApp\Http\Middleware;
+
+use Closure;
+
+class RedirectIfIsFacebookRequest {
+
+	private function getLatestRequestId() {
+		$latestRequest = null;
+
+		$requestIds = \Request::get( "request_ids" );
+
+		if ( ! empty( $requestIds ) ) {
+			// request_ids is a comma separated string with the latest request id at the end.
+			// we need to grab that last request id!
+			$requests      = explode( ',', $requestIds );
+			$latestRequest = end( $requests );
+		}
+
+		return $latestRequest;
+	}
+
+	private function getLatestRequest() {
+		$latestRequestId = $this->getLatestRequestId();
+
+		if ( $latestRequestId ) {
+			$request = \Euw\FacebookApp\Modules\Requests\Models\Request::whereRequestId( $latestRequestId )->first();
+
+			return $request;
+		}
+
+		return null;
+	}
+
+	private function getSubdomainForRequest( $request ) {
+		$subdomain = $request->tenant->subdomain;
+
+		return $subdomain;
+	}
+
+	/**
+	 * Handle an incoming request.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \Closure  $next
+	 * @return mixed
+	 */
+	public function handle($request, Closure $next)
+	{
+		$request = $this->getLatestRequest();
+
+		if ( $request ) {
+			$subdomain = $this->getSubdomainForRequest( $request );
+			$domain = Config::get( 'app.domain' );
+			$path = Request::server( 'SCRIPT_NAME' );
+
+			$url = '//' . $subdomain . '.' . $domain . $path;
+
+			return Redirect::to( $url );
+		}
+
+		return $next($request);
+	}
+
+}
