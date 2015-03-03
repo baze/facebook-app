@@ -13,7 +13,7 @@ class FacebookAppServiceProvider extends ServiceProvider {
 	{
 //		$this->loadViewsFrom( __DIR__ . '/path/to/views', 'courier' );
 
-		include __DIR__ . '/../../routes.php';
+		include __DIR__ . '/../../../routes.php';
 	}
 
 	/**
