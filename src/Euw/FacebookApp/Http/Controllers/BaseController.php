@@ -2,27 +2,27 @@
 
 use App;
 use Config;
-use Controller;
 use Laracasts\Utilities\JavaScript\JavaScriptFacade;
 use View;
 
-class BaseController extends Controller
+class BaseController extends App\Http\Controllers\Controller
 {
     protected $tenant;
-    protected $facebook;
 
     public function __construct()
     {
         $context = App::make('Euw\MultiTenancy\Contexts\Context');
         $this->tenant = $context->getOrThrowException();
 
-        $this->facebook = App::make('Facebook');
+        $appId = Config::get( 'laravel-facebook-sdk.facebook_config.app_id' );
+        $channelUrl = Config::get( 'euw-facebook-app.channelUrl' );
+        $permissions = Config::get( 'laravel-facebook-sdk.default_scope' );
 
         JavaScriptFacade::put([
-            'appId'       => Config::get('facebook-app::appId'),
-            'channelUrl'  => Config::get('facebook-app::channelUrl'),
+            'appId'       => $appId,
+            'channelUrl'  => $channelUrl,
             'pageId'      => $this->tenant->fb_page_id,
-            'permissions' => Config::get('facebook-app::scope')
+            'permissions' => implode( $permissions, ',' )
         ]);
 
         View::share('pageId', $this->tenant->fb_page_id);

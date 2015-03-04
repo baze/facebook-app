@@ -15,7 +15,7 @@
         "illuminate/routing": "~5",
         "illuminate/session": "~5",
         "illuminate/support": "~5",
-        "laracasts/utilities": "2.0",
+        "laracasts/utilities": "~2.0",
         "sammyk/laravel-facebook-sdk": "~2.0@dev",
         "facebook/php-sdk-v4": "~4.1.0@dev",
         "euw/multi-tenancy": "dev-master"
