@@ -1,13 +1,16 @@
 <?php namespace Euw\FacebookApp\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 
 class RedirectIfIsFacebookRequest {
 
 	private function getLatestRequestId() {
 		$latestRequest = null;
 
-		$requestIds = \Request::get( "request_ids" );
+		$requestIds = Request::get( "request_ids" );
 
 		if ( ! empty( $requestIds ) ) {
 			// request_ids is a comma separated string with the latest request id at the end.
@@ -46,10 +49,10 @@ class RedirectIfIsFacebookRequest {
 	 */
 	public function handle($request, Closure $next)
 	{
-		$request = $this->getLatestRequest();
+		$fbRequest = $this->getLatestRequest();
 
-		if ( $request ) {
-			$subdomain = $this->getSubdomainForRequest( $request );
+		if ( $fbRequest ) {
+			$subdomain = $this->getSubdomainForRequest( $fbRequest );
 			$domain = Config::get( 'app.domain' );
 			$path = Request::server( 'SCRIPT_NAME' );
 

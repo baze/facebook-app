@@ -11,7 +11,9 @@ class FacebookAppServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-//		$this->loadViewsFrom( __DIR__ . '/path/to/views', 'courier' );
+		$this->publishes( [
+			realpath( __DIR__ . '/../../../migrations' ) => $this->app->databasePath() . '/migrations',
+		] );
 
 		include __DIR__ . '/../../../routes.php';
 	}
