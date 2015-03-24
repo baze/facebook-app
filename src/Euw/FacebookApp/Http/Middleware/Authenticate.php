@@ -43,10 +43,7 @@ class Authenticate {
 				$login_url = $fb->getLoginUrl();
 
 				//	return '<script>window.top.location.href="' . $login_url . '"</script>';
-
-				// Obviously you'd do this in blade :)
-				echo '<input type="hidden" name="_token" value="' . csrf_token() . '">';
-				return '<a href="' . $login_url . '">Login with Facebook</a>';
+				return view('facebook-app::auth')->with('loginUrl', $login_url);
 			}
 		}
 

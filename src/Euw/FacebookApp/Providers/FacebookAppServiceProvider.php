@@ -19,7 +19,7 @@ class FacebookAppServiceProvider extends ServiceProvider {
 			__DIR__ . '/../../../config/euw-facebook-app.php' => config_path( 'euw-facebook-app.php' ),
 		], 'config' );
 
-		$this->loadViewsFrom( __DIR__ . '/../../../views', 'facebook-app' );
+		$this->loadViewsFrom( __DIR__ . '/../../../resources/views', 'facebook-app' );
 
 		include __DIR__ . '/../../../routes.php';
 	}
