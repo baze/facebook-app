@@ -45,6 +45,7 @@ class Authenticate {
 				//	return '<script>window.top.location.href="' . $login_url . '"</script>';
 
 				// Obviously you'd do this in blade :)
+				echo '<input type="hidden" name="_token" value="' . csrf_token() . '">';
 				return '<a href="' . $login_url . '">Login with Facebook</a>';
 			}
 		}
