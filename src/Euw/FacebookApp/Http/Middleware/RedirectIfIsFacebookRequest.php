@@ -58,7 +58,7 @@ class RedirectIfIsFacebookRequest {
 
 			$url = '//' . $subdomain . '.' . $domain . $path;
 
-			return Redirect::to( $url );
+			return redirect()->to( $url );
 		}
 
 		return $next($request);

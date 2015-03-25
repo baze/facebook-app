@@ -82,13 +82,7 @@
     </div>
 </div>
 
-<div class="container-fluid">
-    <footer class="_global-footer" role="contentinfo">
-        <nav role="navigation" class="_global-footer-navigation">
-            @yield('footer')
-        </nav>
-    </footer>
-</div>
+@include('facebook-app::_globals._global-footer')
 
 @include('facebook-app::scripts')
 

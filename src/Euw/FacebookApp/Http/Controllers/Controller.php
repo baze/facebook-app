@@ -16,8 +16,6 @@ abstract class Controller extends BaseController {
 
     public function __construct()
     {
-        $this->middleware( 'facebook-app.auth' );
-
         $context = app()->make('Euw\MultiTenancy\Contexts\Context');
         $this->tenant = $context->getOrThrowException();
 

@@ -8,23 +8,13 @@ class UsersController extends Controller {
 
 	public function store() {
 
-		$uid = Input::get( 'id' );
+		if ( Input::get( 'id' )) {
+			$user = \App\User::createOrUpdateGraphNode( Input::all() );
 
-		$userRepository = app()->make('Euw\FacebookApp\Modules\Users\Repositories\UserRepository');
-
-		$user = $userRepository->getFirstBy( 'fb_id', $uid );
-
-		$statusCode = IlluminateResponse::HTTP_OK;
-
-		if ( ! $user ) {
-			$user = $userRepository->create( array_merge( Input::all(), [
-				'fb_id' => $uid
-			] ) );
-
-			$statusCode = IlluminateResponse::HTTP_CREATED;
+			return response( [ 'data' => $user ]);
+		} else {
+			return response( [ 'error' => 'No ID specified' ], IlluminateResponse::HTTP_UNPROCESSABLE_ENTITY );
 		}
-
-		return response( [ 'data' => $user ], $statusCode );
 
 	}
 

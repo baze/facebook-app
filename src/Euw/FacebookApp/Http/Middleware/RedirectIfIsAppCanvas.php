@@ -1,7 +1,6 @@
 <?php namespace Euw\FacebookApp\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\App;
 
 class RedirectIfIsAppCanvas {
 
@@ -14,7 +13,7 @@ class RedirectIfIsAppCanvas {
 	 */
 	public function handle($request, Closure $next)
 	{
-		$fb = App::make( 'SammyK\LaravelFacebookSdk\LaravelFacebookSdk' );
+		$fb = app()->make( 'SammyK\LaravelFacebookSdk\LaravelFacebookSdk' );
 
 		try {
 			$token = $fb->getCanvasHelper()->getAccessToken();

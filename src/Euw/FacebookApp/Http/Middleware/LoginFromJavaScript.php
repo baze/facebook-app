@@ -1,8 +1,10 @@
 <?php namespace Euw\FacebookApp\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
-class RedirectIfIsPageTab {
+class LoginFromJavaScript {
 
 	/**
 	 * Handle an incoming request.
@@ -15,16 +17,16 @@ class RedirectIfIsPageTab {
 	{
 		$fb = app()->make( 'SammyK\LaravelFacebookSdk\LaravelFacebookSdk' );
 
+		// Obtain an access token.
 		try {
-			$token = $fb->getPageTabHelper()->getAccessToken();
+			$token = $fb->getJavaScriptHelper()->getAccessToken();
 		} catch ( \Facebook\Exceptions\FacebookSDKException $e ) {
 			// Failed to obtain access token
 			dd( $e->getMessage() );
 		}
 
-		// $token will be null if the user hasn't authenticated your app yet
-		if ( ! $token ) {
-			// . . .
+		if ($token) {
+			dd($token);
 		}
 
 		return $next($request);

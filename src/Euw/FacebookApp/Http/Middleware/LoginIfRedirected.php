@@ -1,7 +1,6 @@
 <?php namespace Euw\FacebookApp\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -16,7 +15,7 @@ class LoginIfRedirected {
 	 */
 	public function handle($request, Closure $next)
 	{
-		$fb = App::make( 'SammyK\LaravelFacebookSdk\LaravelFacebookSdk' );
+		$fb = app()->make( 'SammyK\LaravelFacebookSdk\LaravelFacebookSdk' );
 
 		// Obtain an access token.
 		try {
@@ -63,7 +62,7 @@ class LoginIfRedirected {
 
 		// Get basic info on the user from Facebook.
 		try {
-			$response = $fb->get( '/me?fields=id,first_name,last_name,email' );
+			$response = $fb->get( '/me?fields=id,name,first_name,last_name,email' );
 		} catch ( \Facebook\Exceptions\FacebookSDKException $e ) {
 			dd( $e->getMessage() );
 		}
@@ -78,7 +77,9 @@ class LoginIfRedirected {
 		// Log the user into Laravel
 		Auth::login( $user );
 
-		return redirect( '/' )->with( 'message', 'Successfully logged in with Facebook' );
+		flash()->success( 'Successfully logged in with Facebook');
+
+		return redirect( '/' );
 
 		return $next($request);
 	}

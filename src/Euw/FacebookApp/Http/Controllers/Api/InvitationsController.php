@@ -9,25 +9,13 @@ class InvitationsController extends Controller {
 
 	public function store() {
 
-		$requestRepository = app()->make('Euw\FacebookApp\Modules\Requests\Repositories\RequestRepository');
-		$userRepository = app()->make( 'Euw\FacebookApp\Modules\Users\Repositories\UserRepository' );
+		$requestRepository    = app()->make( 'Euw\FacebookApp\Modules\Requests\Repositories\RequestRepository' );
+		$userRepository       = app()->make( 'Euw\FacebookApp\Modules\Users\Repositories\UserRepository' );
 		$invitationRepository = app()->make( 'Euw\FacebookApp\Modules\Invitations\Repositories\InvitationRepository' );
 
 		$request = $requestRepository->create( Input::all() );
 
-		$me = Auth::user();
-
-		$uid = $me->fb_id;
-
-		$sender = $userRepository->getFirstBy( 'fb_id', $uid );
-
-		if ( ! $sender ) {
-			$userInfo = $me;
-
-			$sender = $userRepository->create( array_merge( $userInfo, [
-				'fb_id' => $uid
-			] ) );
-		}
+		$sender = Auth::user();
 
 		foreach ( Input::get( 'to' ) as $to ) {
 

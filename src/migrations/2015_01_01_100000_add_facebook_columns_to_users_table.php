@@ -20,6 +20,7 @@ class AddFacebookColumnsToUsersTable extends Migration {
 
 			$table->string( 'first_name' )->nullable();
 			$table->string( 'last_name' )->nullable();
+
 			$table->string( 'phone' )->nullable();
 			$table->string( 'address' )->nullable();
 			$table->string( 'postal', 5 )->nullable();
