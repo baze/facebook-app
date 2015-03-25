@@ -76,6 +76,8 @@
 
 <div class="_global-main">
     <div class="container-fluid">
+        @include('flash::message')
+    
         @yield('content')
     </div>
 </div>
