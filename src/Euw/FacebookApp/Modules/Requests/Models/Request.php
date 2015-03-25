@@ -1,19 +1,15 @@
 <?php namespace Euw\FacebookApp\Modules\Requests\Models;
 
-use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 
-class Request extends \Eloquent
+class Request extends Model
 {
-
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
     protected $table = 'requests';
 
-    // Use fillable as a white list
-    protected $fillable = array('request_id', 'tenant_id');
+    protected $fillable = [
+        'request_id',
+        'tenant_id'
+    ];
 
     public function tenant()
     {

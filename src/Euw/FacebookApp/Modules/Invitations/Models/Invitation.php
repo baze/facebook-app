@@ -1,13 +1,9 @@
 <?php namespace Euw\FacebookApp\Modules\Invitations\Models;
 
-class Invitation extends \Eloquent
-{
+use Illuminate\Database\Eloquent\Model;
 
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
+class Invitation extends Model
+{
     protected $table = 'invitations';
 
     protected $softDelete = false;
