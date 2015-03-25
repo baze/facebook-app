@@ -1,6 +1,6 @@
 'use strict';
 
-//require('./modal.js')();
+require('./modal.js')();
 //require('./datetimepicker.js')();
 //require('./popover.js')();
 //require('./webfonts.js')();
