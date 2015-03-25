@@ -19,16 +19,14 @@ module.exports = function ($rootScope, $window, $http) {
                         request_id: response.request
                     };
 
-                    console.log(data);
-
                     $http.post($window.myApp.url + '/invitations', data).
                         success(function (data, status, headers, config) {
-                            console.log("success");
-                            console.log(data);
+                            //console.log("success");
+                            //console.log(data);
                         }).
                         error(function (data, status, headers, config) {
-                            console.log("error");
-                            console.log(data);
+                            //console.log("error");
+                            //console.log(data);
                         });
 
                 } else {
