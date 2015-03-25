@@ -20,12 +20,16 @@ class FacebookAppServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->publishes( [
-			realpath( __DIR__ . '/../../../migrations' ) => $this->app->databasePath() . '/migrations',
-		] );
+			__DIR__ . '/../../../migrations/' => base_path( '/database/migrations' )
+		], 'migrations' );
 
 		$this->publishes( [
 			__DIR__ . '/../../../config/euw-facebook-app.php' => config_path( 'euw-facebook-app.php' ),
 		], 'config' );
+
+		$this->publishes( [
+			__DIR__ . '/../../../resources/assets/js/' => base_path( '/resources/assets/js' )
+		]);
 
 		$this->loadViewsFrom( __DIR__ . '/../../../resources/views', 'facebook-app' );
 
