@@ -37,7 +37,7 @@ class Authenticate {
 			if ( $request->ajax() ) {
 				return response( 'Unauthorized.', 401 );
 			} else {
-				$fb = App::make( 'SammyK\LaravelFacebookSdk\LaravelFacebookSdk' );
+				$fb = app()->make( 'SammyK\LaravelFacebookSdk\LaravelFacebookSdk' );
 
 				// Send an array of permissions to request
 				$login_url = $fb->getLoginUrl();

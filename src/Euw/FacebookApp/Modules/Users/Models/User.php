@@ -1,9 +1,35 @@
 <?php namespace Euw\FacebookApp\Modules\Users\Models;
 
-use Carbon\Carbon;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use SammyK\LaravelFacebookSdk\SyncableGraphNodeTrait;
 
-class User extends \Eloquent
-{
+class UserObserver {
+
+    public function saving( $model ) {
+        $context = app()->make( 'Euw\MultiTenancy\Contexts\Context' );
+        $tenant  = $context->getOrThrowException();
+
+        $model->tenant_id = $tenant->id;
+    }
+
+    public function saved( $model ) {
+//		dd( "saved" );
+    }
+
+}
+
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
+
+    use Authenticatable, CanResetPassword;
+    use SyncableGraphNodeTrait;
+
+    protected static $graph_node_field_aliases = [
+        'id' => 'fb_id',
+    ];
 
     /**
      * The database table used by the model.
@@ -12,34 +38,32 @@ class User extends \Eloquent
      */
     protected $table = 'users';
 
-    protected $softDelete = false;
-
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
-        'tenant_id',
         'fb_id',
         'first_name',
         'last_name',
-        'email'
+        'name',
+        'email',
+        'password',
+        'tenant_id'
     ];
 
-    public function answers()
-    {
-        return $this->hasMany('Euw\\Quiz\\Modules\\UserAnswer');
-    }
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [ 'password', 'remember_token', 'access_token' ];
 
-    public function points()
-    {
-        $points = 0;
+    public static function boot() {
+        parent::boot();
 
-        foreach($this->answers as $userAnswer) {
-            if ((int)$userAnswer->answer->is_correct) {
-                $points += 3;
-            } else {
-                $points += 1;
-            }
-        }
-
-        return $points;
+        User::observe( new UserObserver );
     }
 
 

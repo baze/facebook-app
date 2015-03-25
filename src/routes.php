@@ -8,6 +8,7 @@ $mainAppRoutes = function () {
 };
 
 $domain = Config::get( 'euw-facebook-app.domain' );
+$appName = Config::get( 'euw-facebook-app.appName' );
 
 Route::group( [ 'domain' => 'www.' . $domain ], $mainAppRoutes );
 Route::group( [ 'domain' => 'apps.' . $domain ], $mainAppRoutes );
@@ -20,3 +21,10 @@ Route::get( '/facebook/callback', [
 //       throw new \Euw\FacebookApp\Exceptions\UserHasDeniedAuthenticationException();
     }
 ] );
+
+View::share( 'appName', $appName );
+
+Route::any( '/', [ 'as' => 'home', 'uses' => 'App\Http\Controllers\HomeController@index' ] );
+
+Route::resource( 'users', 'Euw\FacebookApp\Http\Controllers\Api\UsersController', [ 'only' => [ 'store' ] ] );
+Route::resource( 'invitations', 'Euw\FacebookApp\Http\Controllers\Api\InvitationsController', [ 'only' => [ 'store' ] ] );

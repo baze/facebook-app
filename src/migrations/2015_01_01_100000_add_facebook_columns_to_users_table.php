@@ -10,10 +10,8 @@ class AddFacebookColumnsToUsersTable extends Migration {
 	 *
 	 * @return void
 	 */
-	public function up()
-	{
-		Schema::table('users', function(Blueprint $table)
-		{
+	public function up() {
+		Schema::table( 'users', function ( Blueprint $table ) {
 			// If the primary id in your you user table is different than the Facebook id
 			// Make sure it's an unsigned() bigInteger()
 			$table->bigInteger( 'fb_id' )->unsigned()->index();
@@ -35,7 +33,9 @@ class AddFacebookColumnsToUsersTable extends Migration {
 			$table->foreign( 'tenant_id' )
 			      ->references( 'id' )->on( 'tenants' )
 			      ->onDelete( 'cascade' );
-		});
+
+			$table->dropUnique( 'users_email_unique' );
+		} );
 	}
 
 	/**
@@ -43,17 +43,26 @@ class AddFacebookColumnsToUsersTable extends Migration {
 	 *
 	 * @return void
 	 */
-	public function down()
-	{
-		Schema::table('users', function(Blueprint $table)
-		{
+	public function down() {
+		Schema::table( 'users', function ( Blueprint $table ) {
 			$table->dropColumn(
 				'fb_id',
 				'access_token',
 				'first_name',
-				'last_name'
+				'last_name',
+				'phone',
+				'address',
+				'postal',
+				'city',
+				'birthday',
+				'privacy_agreement',
+				'contact_post',
+				'contact_email',
+				'tenant_id'
 			);
-		});
+
+			$table->unique( 'email' );
+		} );
 	}
 
 }
