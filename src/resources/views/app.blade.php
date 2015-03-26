@@ -83,7 +83,9 @@
     </div>
 </div>
 
-@include('facebook-app::_globals._global-footer')
+<div class="container-fluid">
+    @include('facebook-app::_globals._global-footer')
+</div>
 
 @include('facebook-app::scripts')
 
