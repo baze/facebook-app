@@ -1,6 +1,10 @@
 <?php namespace Euw\FacebookApp\Http\Middleware;
 
 use Closure;
+use Euw\MultiTenancy\Exceptions\TenantNotFoundException;
+use Euw\MultiTenancy\Modules\Tenants\Models\Tenant;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Request;
 
 class RedirectIfIsPageTab {
 
@@ -15,16 +19,26 @@ class RedirectIfIsPageTab {
 	{
 		$fb = app()->make( 'SammyK\LaravelFacebookSdk\LaravelFacebookSdk' );
 
-		try {
-			$token = $fb->getPageTabHelper()->getAccessToken();
-		} catch ( \Facebook\Exceptions\FacebookSDKException $e ) {
-			// Failed to obtain access token
-			dd( $e->getMessage() );
-		}
+		$pageId = $fb->getPageTabHelper()->getPageId();
 
-		// $token will be null if the user hasn't authenticated your app yet
-		if ( ! $token ) {
-			// . . .
+		if ($pageId) {
+			$tenant = Tenant::where( 'fb_page_id', '=', $pageId )->first();
+
+			if ( ! $tenant ) {
+				throw new TenantNotFoundException;
+			}
+
+			if ( $tenant ) {
+				$subdomain = $tenant->subdomain;
+				$domain = Config::get( 'euw-facebook-app.domain' );
+
+				$url = Request::secure() ? 'https://' : 'http://';
+				$url .= $subdomain . '.';
+				$url .= $domain;
+				$url .= Request::server( 'SCRIPT_NAME' );
+
+				return redirect()->to( $url );
+			}
 		}
 
 		return $next($request);

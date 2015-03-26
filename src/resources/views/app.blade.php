@@ -15,9 +15,10 @@
     <meta http-equiv="cleartype" content="on">
 
     @if ($pageId)
-    {!! HTML::style('css/'.$pageId.'/main.css') !!}
+        {!! HTML::style('css/main.css') !!}
+        {!! HTML::style('css/'.$pageId.'/main.css') !!}
     @else
-    {!! HTML::style('css/main.css') !!}
+        {!! HTML::style('css/main.css') !!}
     @endif
 
     {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js') !!}
