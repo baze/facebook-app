@@ -8,9 +8,7 @@ class Text extends Model
 
     protected $softDelete = false;
 
-    protected $fillable = [
-        'tenant_id'
-    ];
+    protected $guarded = [ ];
 
 
 
