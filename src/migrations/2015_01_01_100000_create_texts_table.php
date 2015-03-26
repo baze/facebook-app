@@ -16,9 +16,23 @@ class CreateTextsTable extends Migration {
             $table->engine = 'InnoDB';
             $table->increments('id');
 
+            $table->string( 'brand_title' );
+            $table->text( 'permission_denied' );
+
+            $table->string( 'instructions_headline' )->default( 'So geht’s' );
+            $table->string( 'instructions_subline' );
+            $table->text( 'instructions_lead' );
+            $table->text( 'instructions_body' );
+
+            $table->text( 'call_to_action' );
+
             $table->text('terms_of_use');
             $table->text('privacy_policy');
+
             $table->string('share_message', 255);
+
+            $table->string( 'fan_gate_title' )->default( 'Werde Fan und spiel mit!' );
+            $table->text( 'fan_gate_body' );
 
             $table->integer('tenant_id')->unsigned()->nullable();
             $table->foreign('tenant_id')
