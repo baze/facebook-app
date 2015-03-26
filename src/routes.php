@@ -8,7 +8,6 @@ $mainAppRoutes = function () {
 };
 
 $domain = Config::get( 'euw-facebook-app.domain' );
-$appName = Config::get( 'euw-facebook-app.appName' );
 
 Route::group( [ 'domain' => 'www.' . $domain ], $mainAppRoutes );
 Route::group( [ 'domain' => 'apps.' . $domain ], $mainAppRoutes );
@@ -17,14 +16,17 @@ Route::group( [ 'domain' => $domain ], $mainAppRoutes );
 // Endpoint that is redirected to after an authentication attempt
 Route::get( '/facebook/callback', [
     'middleware' => 'facebook-app.login',
-    'uses'       => function () {
-//       throw new \Euw\FacebookApp\Exceptions\UserHasDeniedAuthenticationException();
-    }
+    'uses'       => function () { }
 ] );
 
-View::share( 'appName', $appName );
+Route::get( '/facebook/javascript', [
+    'middleware' => 'facebook-app.javascript',
+    'uses'       => function () { }
+] );
 
 Route::any( '/', [ 'as' => 'home', 'uses' => 'App\Http\Controllers\HomeController@index' ] );
 
 Route::resource( 'users', 'Euw\FacebookApp\Http\Controllers\Api\UsersController', [ 'only' => [ 'store' ] ] );
 Route::resource( 'invitations', 'Euw\FacebookApp\Http\Controllers\Api\InvitationsController', [ 'only' => [ 'store' ] ] );
+
+Route::get( 'auth/logout', [ 'uses' => 'App\Http\Controllers\Auth\AuthController@getLogout' ] );

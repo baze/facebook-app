@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title></title>
+    <title>{{ isset($texts->brand_title) ? $texts->brand_title : 'Laravel' }}</title>
 
     <meta name="description" content="">
     <meta name="HandheldFriendly" content="True">
@@ -41,7 +41,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ route('home') }}">{{{ isset($appName) ? $appName : 'Laravel' }}}</a>
+                <a class="navbar-brand" href="{{ route('home') }}">{{ isset($texts->brand_title) ? $texts->brand_title : 'Laravel' }}</a>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

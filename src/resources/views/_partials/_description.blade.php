@@ -1,7 +1,7 @@
 <div class="description">
-    <h3>{{ $texts->instructions_headline }}</h3>
+    <h3 class="texts-instructions-headline">{{ $texts->instructions_headline }}</h3>
 
-    <h4>{{ $texts->instructions_subline }}</h4>
+    <h4 class="texts-instructions-subline">{{ $texts->instructions_subline }}</h4>
 
-    <p>{{ $texts->instructions_body }}</p>
+    <p class="texts-instructions-body">{!! nl2br($texts->instructions_body) !!}</p>
 </div>

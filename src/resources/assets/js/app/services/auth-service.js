@@ -12,12 +12,23 @@ module.exports = function ($rootScope, $window, userService) {
 
             FB.getLoginStatus(function (response) {
                 if (response.authResponse) {
+
+                    if ($window.myApp.fbId && (response.authResponse.userID != $window.myApp.fbId)) {
+                        top.location.href = $window.myApp.url + '/auth/logout';
+                        return;
+                    }
+
                     //fbUserId = response.authResponse.userID;
                     //token = response.authResponse.accessToken;
                     _self.getUserInfo();
                 }
                 else {
-                    _self.login();
+
+                    if ($window.myApp.fbId) {
+                        top.location.href = $window.myApp.url + '/auth/logout';
+                    } else {
+                        _self.login();
+                    }
                 }
             }, true);
         },
@@ -25,7 +36,7 @@ module.exports = function ($rootScope, $window, userService) {
         getUserInfo: function () {
             var _self = this;
 
-            FB.api('/me', function (response) {
+            FB.api('/me?fields=id,name,first_name,last_name,email', function (response) {
                 $rootScope.$apply(function () {
                     $rootScope.user = _self.user = response;
                 });
@@ -33,12 +44,12 @@ module.exports = function ($rootScope, $window, userService) {
                 userService.saveToDatabase();
             });
 
-            FB.api('/me/likes', function (response) {
-                $rootScope.$apply(function () {
-                    $rootScope.user.likes = response;
-                    $rootScope.$emit('receivedLikes', 'foo');
-                });
-            });
+            //FB.api('/me/likes', function (response) {
+            //    $rootScope.$apply(function () {
+            //        $rootScope.user.likes = response;
+            //        $rootScope.$emit('receivedLikes', 'foo');
+            //    });
+            //});
         },
 
         login: function (refreshPage) {
@@ -47,13 +58,17 @@ module.exports = function ($rootScope, $window, userService) {
             FB.login(function (response) {
                 if (response.authResponse) {
                     //console.log('Welcome!  Fetching your information.... ');
-                    FB.api('/me', function (response) {
-                        //console.log('Good to see you, ' + response.name + '.');
-                    });
+                    //FB.api('/me', function (response) {
+                    //    console.log('Good to see you, ' + response.name + '.');
+                    //});
+
                     _self.getUserInfo();
 
+                    top.location.href = $window.myApp.url + '/facebook/javascript';
+
                     if (refreshPage) {
-                        $window.location.reload();
+                        top.location.href = $window.myApp.url + '/facebook/javascript';
+                        //$window.location.reload();
                     }
                 } else {
                     $('.modal-auth').modal();

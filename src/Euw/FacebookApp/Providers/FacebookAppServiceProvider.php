@@ -23,7 +23,13 @@ class FacebookAppServiceProvider extends ServiceProvider {
 			__DIR__ . '/../../../resources/assets/js/' => base_path( '/resources/assets/js' )
 		]);
 
+		$this->publishes( [
+			__DIR__ . '/../../../resources/lang/de/validation.php' => base_path( '/resources/lang/de/validation.php' )
+		] );
+
 		$this->loadViewsFrom( __DIR__ . '/../../../resources/views', 'facebook-app' );
+
+		$this->loadTranslationsFrom( __DIR__ . '/../../../resources/lang', 'facebook-app' );
 
 		include __DIR__ . '/../../../routes.php';
 	}

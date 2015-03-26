@@ -6,9 +6,11 @@ module.exports = function($rootScope, invitationService) {
         restrict: 'EA',
         scope: {
             label: '@',
-            message: '@'
+            message: '@',
+            class: '@'
         },
-        template: '<button class="btn btn-primary" ng-disabled="initialized">{{ label || "Invite Friends" }}</button>',
+        replace: true,
+        template: '<button class="btn btn-primary" ng-disabled="initialized"><i class="fa fa-share"></i> {{ label || "Invite Friends" }}</button>',
         link: function (scope, elem, attrs) {
 
             $rootScope.$watch('initialized', function () {

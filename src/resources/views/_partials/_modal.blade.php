@@ -6,7 +6,7 @@
                 <h4 class="modal-title">{{ $title }}</h4>
             </div>
             <div class="modal-body">
-                <p>{{ $body }}</p>
+                <p>{!! nl2br($body) !!}</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
