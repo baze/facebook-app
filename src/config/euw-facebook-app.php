@@ -2,6 +2,6 @@
 
 return array(
 	'channelUrl' => 'channel.html',
-	'domain'     => 'mt.dev',
+	'domain'     => env( 'DOMAIN', 'mt.dev' ),
 	'appName'   => 'My App',
 );
