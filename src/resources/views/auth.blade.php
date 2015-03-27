@@ -1,5 +1,5 @@
 @if(View::exists('auth'))
     @include('auth')
 @else
-    @include('auth-fallback')
+    @include('facebook-app::auth-fallback')
 @endif
