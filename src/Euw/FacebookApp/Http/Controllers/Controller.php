@@ -45,6 +45,7 @@ abstract class Controller extends BaseController {
             'permissions' => implode( $permissions, ',' ),
             'url'         => $url,
             'fbId'        => $fbId,
+            'redirectToPageTab' => Config::get( 'euw-facebook-app.redirectToPageTab' );
         ]);
 
         view()->share('pageId', $this->tenant->fb_page_id);
