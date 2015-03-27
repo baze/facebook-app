@@ -41,7 +41,7 @@ module.exports = function ($rootScope, $window, userService) {
                     $rootScope.user = _self.user = response;
                 });
 
-                userService.saveToDatabase();
+                // userService.saveToDatabase();
             });
 
             //FB.api('/me/likes', function (response) {
