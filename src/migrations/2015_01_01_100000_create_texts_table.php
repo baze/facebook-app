@@ -19,10 +19,10 @@ class CreateTextsTable extends Migration {
             $table->string( 'brand_title' );
             $table->text( 'permission_denied' );
 
-            $table->string( 'instructions_headline' )->default( 'So geht’s' );
-            $table->string( 'instructions_subline' );
-            $table->text( 'instructions_lead' );
-            $table->text( 'instructions_body' );
+            $table->string( 'headline' )->default( 'So geht’s' );
+            $table->string( 'subline' );
+            $table->text( 'leading_copy' );
+            $table->text( 'copy' );
 
             $table->text( 'call_to_action' );
 
