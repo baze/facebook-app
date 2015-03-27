@@ -1,3 +1,18 @@
-@include('facebook-app::_globals._global-footer-navigation')
+<div class="_global-footer">
+    <div class="text-center">
+	    <div class="btn-group">
+	        @if(Auth::check())
+	            @include('facebook-app::_partials._invite-button')
+	        @endif
 
-@include('facebook-app::_partials._modal', ['modalClass' => 'modal-auth', 'title' => 'Bitte erlaube der App Zugriff auf deine Daten.', 'body' => $texts->permission_denied ])
+			@if($texts->terms_of_use)
+	        	<button class="btn-link" data-toggle="modal" data-target=".modal-terms">Teilnahmebedingungen</button>
+	        @endif
+
+			@if($texts->privacy_policy)
+				<button class="btn-link" data-toggle="modal" data-target=".modal-privacy">Datenschutzbestimmungen</button>
+			@endif
+
+	    </div>
+	</div>
+</div>
