@@ -1,4 +1,4 @@
-<div class="_global-footer">
+<div class="_global-app-footer">
     <div class="text-center">
 	    <div class="btn-group">
 	        @if(Auth::check())

@@ -48,8 +48,11 @@
             @yield('content')
         </main>
 
-        @include('facebook-app::_globals._global-footer')
+        <footer class="_global-footer">
+            @yield('footer')
 
+            @include('facebook-app::_globals._global-footer')
+        </footer>
     </div>
 
     @include('facebook-app::_partials._modal-texts')
