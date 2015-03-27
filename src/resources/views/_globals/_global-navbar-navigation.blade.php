@@ -1,5 +1,7 @@
 <ul class="nav navbar-nav">
-    {{--<li><a href="{{ url('/') }}">Home</a></li>--}}
+    <li class="{{ Route::is('home') ? 'active' : '' }}">
+        {!! link_to_route('home', 'Home') !!}
+    </li>
 </ul>
 
 <ul class="nav navbar-nav navbar-right">
