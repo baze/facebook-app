@@ -1,0 +1,12 @@
+$primary-font: sans-serif;
+$secondary-font: serif;
+
+body {
+  font-family: $primary-font;
+  color: $primary-color;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $secondary-font;
+  color: $highlight-color-2;
+}

@@ -24,6 +24,10 @@ class FacebookAppServiceProvider extends ServiceProvider {
 		]);
 
 		$this->publishes( [
+			__DIR__ . '/../../../resources/assets/sass/' => base_path( '/resources/assets/sass' )
+		]);
+
+		$this->publishes( [
 			__DIR__ . '/../../../resources/lang/de/validation.php' => base_path( '/resources/lang/de/validation.php' )
 		] );
 
