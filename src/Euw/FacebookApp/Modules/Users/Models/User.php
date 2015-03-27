@@ -21,7 +21,20 @@ class UserObserver {
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
     use Authenticatable, CanResetPassword;
-    use SyncableGraphNodeTrait;
+    use SyncableGraphNodeTrait {
+        firstOrNewGraphNode as traitFirstOrNewGraphNode;
+    }
+
+    public static function firstOrNewGraphNode($attributes) {
+        $context = app()->make( 'Euw\MultiTenancy\Contexts\Context' );
+        $tenant  = $context->getOrThrowException();
+
+        $attributes = array_merge( $attributes, [
+            'tenant_id' => $tenant->id
+        ] );
+
+        return static::traitFirstOrNewGraphNode($attributes );
+    }
 
     protected static $graph_node_field_aliases = [
         'id' => 'fb_id',

@@ -14,7 +14,7 @@ class AddFacebookColumnsToUsersTable extends Migration {
 		Schema::table( 'users', function ( Blueprint $table ) {
 			// If the primary id in your you user table is different than the Facebook id
 			// Make sure it's an unsigned() bigInteger()
-			$table->bigInteger( 'fb_id' )->unsigned()->index();
+			$table->bigInteger( 'fb_id' )->unsigned();
 			// Normally you won't need to store the access token in the database
 			$table->string( 'access_token' )->nullable();
 

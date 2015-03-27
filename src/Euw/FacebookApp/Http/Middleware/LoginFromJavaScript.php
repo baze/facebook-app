@@ -1,6 +1,7 @@
 <?php namespace Euw\FacebookApp\Http\Middleware;
 
 use Closure;
+use Euw\MultiTenancy\Modules\Tenants\Models\Tenant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -55,6 +56,7 @@ class LoginFromJavaScript {
 
 			// Create the user if it does not exist or update the existing entry.
 			// This will only work if you've added the SyncableGraphNodeTrait to your User model.
+
 			$user = \App\User::createOrUpdateGraphNode( $facebook_user );
 
 			// Log the user into Laravel
