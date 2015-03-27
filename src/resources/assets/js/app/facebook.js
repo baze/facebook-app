@@ -23,7 +23,7 @@ module.exports = function ($rootScope, $window, authService) {
     if (NotInFacebookFrame() || ReferrerIsFacebookApp()) {
         var md = new MobileDetect($window.navigator.userAgent);
 
-        if (!md.mobile() && $window.myApp.pageId) {
+        if (!md.mobile() && $window.myApp.pageId && $window.myApp.redirectToPageTab) {
             //console.log("redirect");
             top.location.href = 'https://www.facebook.com/' + $window.myApp.pageId + '/?sk=app_' + $window.myApp.appId;
         }
@@ -42,7 +42,7 @@ module.exports = function ($rootScope, $window, authService) {
             status: true, // check login status
             cookie: true, // enable cookies to allow the server to access the session
             xfbml: true,  // parse XFBML
-            version: 'v2.1'
+            version: 'v2.2'
         });
 
         FB.Canvas.setAutoGrow();
@@ -73,7 +73,7 @@ module.exports = function ($rootScope, $window, authService) {
         }
         js = d.createElement(s);
         js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
+        js.src = "//connect.facebook.net/de_DE/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 
