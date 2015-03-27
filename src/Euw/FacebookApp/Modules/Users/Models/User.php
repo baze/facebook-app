@@ -9,15 +9,11 @@ use SammyK\LaravelFacebookSdk\SyncableGraphNodeTrait;
 
 class UserObserver {
 
-    public function saving( $model ) {
+    public function creating( $model ) {
         $context = app()->make( 'Euw\MultiTenancy\Contexts\Context' );
         $tenant  = $context->getOrThrowException();
 
         $model->tenant_id = $tenant->id;
-    }
-
-    public function saved( $model ) {
-//		dd( "saved" );
     }
 
 }
@@ -63,7 +59,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public static function boot() {
         parent::boot();
 
-        User::observe( new UserObserver );
+        static::observe( new UserObserver );
     }
 
 
