@@ -21,6 +21,8 @@ abstract class Controller extends BaseController {
         $context = app()->make('Euw\MultiTenancy\Contexts\Context');
         $this->tenant = $context->getOrThrowException();
 
+        view()->share( 'tenant', $this->tenant );
+
         $textRepository = app()->make( 'Euw\FacebookApp\Modules\Texts\Repositories\TextRepository' );
         $texts = $textRepository->first();
 
