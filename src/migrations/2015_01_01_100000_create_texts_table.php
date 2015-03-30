@@ -20,7 +20,7 @@ class CreateTextsTable extends Migration {
             $table->text( 'permission_denied' );
 
             $table->string( 'headline' )->default( 'So geht’s' );
-            $table->string( 'subline' );
+            $table->text( 'subline' );
             $table->text( 'leading_copy' );
             $table->text( 'copy' );
 
