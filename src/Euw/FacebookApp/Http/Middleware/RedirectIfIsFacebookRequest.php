@@ -1,8 +1,6 @@
 <?php namespace Euw\FacebookApp\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 
 class RedirectIfIsFacebookRequest {
@@ -53,7 +51,7 @@ class RedirectIfIsFacebookRequest {
 
 		if ( $fbRequest ) {
 			$subdomain = $this->getSubdomainForRequest( $fbRequest );
-			$domain = Config::get( 'app.domain' );
+			$domain = config( 'app.domain' );
 			$path = Request::server( 'SCRIPT_NAME' );
 
 			$url = '//' . $subdomain . '.' . $domain . $path;

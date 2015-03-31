@@ -7,7 +7,7 @@ $mainAppRoutes = function () {
     } );
 };
 
-$domain = Config::get( 'euw-facebook-app.domain' );
+$domain = config( 'euw-facebook-app.domain' );
 
 Route::group( [ 'domain' => 'www.' . $domain ], $mainAppRoutes );
 Route::group( [ 'domain' => 'apps.' . $domain ], $mainAppRoutes );

@@ -42,7 +42,7 @@ class Authenticate {
 				// Send an array of permissions to request
 				$login_url = $fb->getLoginUrl();
 
-				//	return '<script>window.top.location.href="' . $login_url . '"</script>';
+				return '<script>window.top.location.href="' . $login_url . '"</script>';
 				return view('facebook-app::auth')->with('loginUrl', $login_url);
 			}
 		}

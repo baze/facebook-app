@@ -2,8 +2,6 @@
 
 use Euw\FacebookApp\Modules\Texts\Models\Text;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\URL;
 use Laracasts\Utilities\JavaScript\JavaScriptFacade;
 use Illuminate\Foundation\Bus\DispatchesCommands;
@@ -21,8 +19,6 @@ abstract class Controller extends BaseController {
         $context = app()->make('Euw\MultiTenancy\Contexts\Context');
         $this->tenant = $context->getOrThrowException();
 
-        view()->share( 'tenant', $this->tenant );
-
         $textRepository = app()->make( 'Euw\FacebookApp\Modules\Texts\Repositories\TextRepository' );
         $texts = $textRepository->first();
 
@@ -30,12 +26,9 @@ abstract class Controller extends BaseController {
             $texts = new Text;
         }
 
-        view()->share( 'texts', $texts );
-
-        $appId = Config::get( 'laravel-facebook-sdk.facebook_config.app_id' );
-        $channelUrl = Config::get( 'euw-facebook-app.channelUrl' );
-        $permissions = Config::get( 'laravel-facebook-sdk.default_scope' );
-//        $url = Request::url();
+        $appId = config( 'laravel-facebook-sdk.facebook_config.app_id' );
+        $channelUrl = config( 'euw-facebook-app.channelUrl' );
+        $permissions = config( 'laravel-facebook-sdk.default_scope' );
         $url = URL::to( '/' );
 
         $fbId = Auth::check() ? Auth::user()->fb_id : null;
@@ -47,13 +40,14 @@ abstract class Controller extends BaseController {
             'permissions' => implode( $permissions, ',' ),
             'url'         => $url,
             'fbId'        => $fbId,
-            'redirectToPageTab' => Config::get( 'euw-facebook-app.redirectToPageTab' ),
+            'redirectToPageTab' => config( 'euw-facebook-app.redirectToPageTab' ),
         ]);
 
-        view()->share('pageId', $this->tenant->fb_page_id);
-
-        $appName = Config::get( 'euw-facebook-app.appName' );
-        view()->share( 'appName', $appName );
+        view()->share( 'tenant', $this->tenant );
+        view()->share( 'texts', $texts );
+        view()->share( 'pageId', $this->tenant->fb_page_id );
+        view()->share( 'appName', config( 'euw-facebook-app.appName' ) );
+        view()->share( 'isAdmin', session( 'is_page_admin' ) );
     }
 
 }
