@@ -75,9 +75,4 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return static::traitFirstOrNewGraphNode($attributes );
     }
 
-    public function getIsAdminAttribute() {
-        return session( 'is_page_admin' );
-    }
-
-
 }

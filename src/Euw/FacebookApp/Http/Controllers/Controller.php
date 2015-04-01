@@ -47,6 +47,7 @@ abstract class Controller extends BaseController {
         view()->share( 'texts', $texts );
         view()->share( 'pageId', $this->tenant->fb_page_id );
         view()->share( 'appName', config( 'euw-facebook-app.appName' ) );
+        view()->share( 'isAdmin', session( 'is_page_admin' ) );
     }
 
 }

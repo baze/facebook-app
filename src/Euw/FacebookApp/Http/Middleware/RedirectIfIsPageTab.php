@@ -3,6 +3,7 @@
 use Closure;
 use Euw\MultiTenancy\Exceptions\TenantNotFoundException;
 use Euw\MultiTenancy\Modules\Tenants\Models\Tenant;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -19,8 +20,8 @@ class RedirectIfIsPageTab {
 	{
 		$fb = app()->make( 'SammyK\LaravelFacebookSdk\LaravelFacebookSdk' );
 
-		if (! session('is_page_admin')) {
-			Session::put( 'is_page_admin', $fb->getPageTabHelper()->isAdmin() );
+		if( $fb->getPageTabHelper()->isAdmin()) {
+			Session::put( 'is_page_admin', true);
 		}
 
 		$pageId = $fb->getPageTabHelper()->getPageId();
