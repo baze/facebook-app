@@ -25,21 +25,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         firstOrNewGraphNode as traitFirstOrNewGraphNode;
     }
 
-    public static function firstOrNewGraphNode($attributes) {
-        $context = app()->make( 'Euw\MultiTenancy\Contexts\Context' );
-        $tenant  = $context->getOrThrowException();
-
-        $attributes = array_merge( $attributes, [
-            'tenant_id' => $tenant->id
-        ] );
-
-        return static::traitFirstOrNewGraphNode($attributes );
-    }
-
-    protected static $graph_node_field_aliases = [
-        'id' => 'fb_id',
-    ];
-
     /**
      * The database table used by the model.
      *
@@ -69,10 +54,29 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $hidden = [ 'password', 'remember_token', 'access_token' ];
 
+    protected static $graph_node_field_aliases = [
+        'id' => 'fb_id',
+    ];
+
     public static function boot() {
         parent::boot();
 
         static::observe( new UserObserver );
+    }
+
+    public static function firstOrNewGraphNode($attributes) {
+        $context = app()->make( 'Euw\MultiTenancy\Contexts\Context' );
+        $tenant  = $context->getOrThrowException();
+
+        $attributes = array_merge( $attributes, [
+            'tenant_id' => $tenant->id
+        ] );
+
+        return static::traitFirstOrNewGraphNode($attributes );
+    }
+
+    public function getIsAdminAttribute() {
+        return session( 'is_page_admin' );
     }
 
 
