@@ -51,10 +51,12 @@ class RedirectIfIsFacebookRequest {
 
 		if ( $fbRequest ) {
 			$subdomain = $this->getSubdomainForRequest( $fbRequest );
-			$domain = config( 'app.domain' );
-			$path = Request::server( 'SCRIPT_NAME' );
+			$domain = config( 'euw-facebook-app.domain' );
 
-			$url = '//' . $subdomain . '.' . $domain . $path;
+			$url = Request::secure() ? 'https://' : 'http://';
+			$url .= $subdomain . '.';
+			$url .= $domain;
+			$url .= Request::server( 'SCRIPT_NAME' );
 
 			return redirect()->to( $url );
 		}
