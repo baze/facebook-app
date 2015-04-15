@@ -2,6 +2,7 @@
 
 use Euw\FacebookApp\Modules\Invitations\Models\Invitation;
 use Euw\FacebookApp\Modules\Invitations\Repositories\EloquentInvitationRepository;
+use Euw\FacebookApp\Modules\Prices\Models\Price;
 use Illuminate\Support\ServiceProvider;
 use Euw\FacebookApp\Modules\Texts\Models\Text;
 use Euw\FacebookApp\Modules\Texts\Repositories\EloquentTextRepository;
@@ -22,6 +23,7 @@ class ModuleProvider extends ServiceProvider
         $this->registerUserRepository();
         $this->registerRequestRepository();
         $this->registerInvitationRepository();
+        $this->registerPriceRepository();
     }
 
     /**
@@ -53,6 +55,12 @@ class ModuleProvider extends ServiceProvider
         $this->app->bind('Euw\FacebookApp\Modules\Invitations\Repositories\InvitationRepository', function ($app) {
             return new EloquentInvitationRepository(new Invitation, $app['context']);
         });
+    }
+
+    public function registerPriceRepository() {
+        $this->app->bind( 'Euw\FacebookApp\Modules\Prices\Repositories\PriceRepository', function ( $app ) {
+            return new EloquentPriceRepository( new Price, $app['context'] );
+        } );
     }
 
 
