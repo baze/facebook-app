@@ -3,23 +3,30 @@
 use Illuminate\Database\Eloquent\Model;
 use Intervention\Image\Facades\Image;
 
-class Price extends Model
-{
-    protected $table = 'prices';
+class Price extends Model {
+	protected $table = 'prices';
 
-    protected $fillable = [
-        'title',
-        'description',
-        'image',
-        'tenant_id',
-    ];
+	protected $fillable = [
+		'title',
+		'description',
+		'image',
+		'tenant_id',
+	];
 
-    public function getThumbnailAttribute() {
-        $img = Image::make(public_path() . '/uploads/choices/' . $this->image);
+	public function tenant() {
+		return $this->belongsTo( 'Euw\MultiTenancy\Modules\Tenants\Models\Tenant' );
+	}
 
-        $img->fit( 300 );
+	public function getThumbnailAttribute() {
+		return $this->thumbnail();
+	}
 
-        return $img->encode( 'data-url' );
-    }
+	public function thumbnail( $width = 300 ) {
+		$img = Image::make( public_path() . '/img/' . $this->tenant->fb_page_id . '/prices/' . $this->image );
+
+		$img->fit( $width );
+
+		return $img->encode( 'data-url' );
+	}
 
 }
