@@ -5,5 +5,9 @@ return array(
 	'domain'     => env( 'DOMAIN', 'mt.dev' ),
 	'appName'   => 'My App',
 	'redirectToPageTab' => true,
-	'admins' => [ ],
+	'admins' => [
+		'YourPageId' => [
+			'Firstname Lastname' => 'FacebookUserId'
+		]
+	],
 );

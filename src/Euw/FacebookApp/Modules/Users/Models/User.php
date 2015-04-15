@@ -76,7 +76,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     public function getIsAdminAttribute() {
-        $admins = config('euw-facebook-app.admins');
+        $context = app()->make( 'Euw\MultiTenancy\Contexts\Context' );
+        $tenant = $context->getOrThrowException();
+
+        $admins = config('euw-facebook-app.admins.' . $tenant->fb_page_id);
 
         return in_array($this->fb_id, $admins);
     }
