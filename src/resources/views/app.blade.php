@@ -42,7 +42,7 @@
             @yield('hero')
         </div>
 
-        <main class="_global-main">
+        <main class="_global-content _global-main">
             @include('flash::message')
         
             @yield('content')
