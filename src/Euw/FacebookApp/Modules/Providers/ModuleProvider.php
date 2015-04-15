@@ -3,6 +3,7 @@
 use Euw\FacebookApp\Modules\Invitations\Models\Invitation;
 use Euw\FacebookApp\Modules\Invitations\Repositories\EloquentInvitationRepository;
 use Euw\FacebookApp\Modules\Prices\Models\Price;
+use Euw\FacebookApp\Modules\Prices\Repositories\EloquentPriceRepository;
 use Illuminate\Support\ServiceProvider;
 use Euw\FacebookApp\Modules\Texts\Models\Text;
 use Euw\FacebookApp\Modules\Texts\Repositories\EloquentTextRepository;
