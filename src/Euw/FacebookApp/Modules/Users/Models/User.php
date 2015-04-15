@@ -75,4 +75,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return static::traitFirstOrNewGraphNode($attributes );
     }
 
+    public function getIsAdminAttribute() {
+        $admins = config('euw-facebook-app.admins');
+
+        return in_array($this->fb_id, $admins);
+    }
+
 }
