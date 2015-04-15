@@ -27,7 +27,7 @@ abstract class Controller extends BaseController {
         }
 
         $priceRepository = app()->make( 'Euw\FacebookApp\Modules\Prices\Repositories\PriceRepository' );
-        $prices = $textRepository->all();
+        $prices = $priceRepository->all();
 
         $appId = config( 'laravel-facebook-sdk.facebook_config.app_id' );
         $channelUrl = config( 'euw-facebook-app.channelUrl' );
