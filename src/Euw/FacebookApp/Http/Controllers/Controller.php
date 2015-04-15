@@ -26,6 +26,9 @@ abstract class Controller extends BaseController {
             $texts = new Text;
         }
 
+        $priceRepository = app()->make( 'Euw\FacebookApp\Modules\Prices\Repositories\PriceRepository' );
+        $prices = $textRepository->all();
+
         $appId = config( 'laravel-facebook-sdk.facebook_config.app_id' );
         $channelUrl = config( 'euw-facebook-app.channelUrl' );
         $permissions = config( 'laravel-facebook-sdk.default_scope' );
@@ -44,10 +47,10 @@ abstract class Controller extends BaseController {
         ]);
 
         view()->share( 'tenant', $this->tenant );
-        view()->share( 'texts', $texts );
         view()->share( 'pageId', $this->tenant->fb_page_id );
         view()->share( 'appName', config( 'euw-facebook-app.appName' ) );
-        view()->share( 'isAdmin', session( 'is_page_admin' ) );
+        view()->share( 'texts', $texts );
+        view()->share( 'prices', $prices );
     }
 
 }

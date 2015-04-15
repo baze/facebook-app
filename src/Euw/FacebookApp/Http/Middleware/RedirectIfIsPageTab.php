@@ -20,9 +20,9 @@ class RedirectIfIsPageTab {
 	{
 		$fb = app()->make( 'SammyK\LaravelFacebookSdk\LaravelFacebookSdk' );
 
-		if( $fb->getPageTabHelper()->isAdmin()) {
-			Session::put( 'is_page_admin', true);
-		}
+//		if( $fb->getPageTabHelper()->isAdmin()) {
+//			Session::put( 'is_page_admin', true);
+//		}
 
 		$pageId = $fb->getPageTabHelper()->getPageId();
 

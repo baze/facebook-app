@@ -43,7 +43,7 @@ class Authenticate {
 				$login_url = $fb->getLoginUrl();
 
 				return '<script>window.top.location.href="' . $login_url . '"</script>';
-				return view('facebook-app::auth')->with('loginUrl', $login_url);
+//				return view('facebook-app::auth')->with('loginUrl', $login_url);
 			}
 		}
 
