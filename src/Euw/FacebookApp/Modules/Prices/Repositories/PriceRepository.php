@@ -1,4 +1,4 @@
-<?php namespace App\Modules\Prices\Repositories;
+<?php namespace Euw\FacebookApp\Modules\Prices\Repositories;
 
 interface PriceRepository
 {

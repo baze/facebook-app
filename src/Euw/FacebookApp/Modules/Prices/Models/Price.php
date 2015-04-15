@@ -1,4 +1,4 @@
-<?php namespace App\Modules\Prices\Models;
+<?php namespace Euw\FacebookApp\Modules\Prices\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Intervention\Image\Facades\Image;

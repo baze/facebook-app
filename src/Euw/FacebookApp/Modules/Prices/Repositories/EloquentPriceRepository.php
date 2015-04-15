@@ -1,4 +1,4 @@
-<?php namespace App\Modules\Prices\Repositories;
+<?php namespace Euw\FacebookApp\Modules\Prices\Repositories;
 
 use Euw\MultiTenancy\Contexts\Context;
 use Illuminate\Database\Eloquent\Model;
