@@ -60,7 +60,7 @@ module.exports = function ($rootScope, $window, authService) {
         });
 
         FB.Event.subscribe('edge.create', function (response) {
-            top.location.reload();
+            location.reload();
         });
 
         authService.getLoginStatus();
