@@ -14,5 +14,16 @@
 			@endif
 
 	    </div>
+
+		@if(isset($pageId))
+			<p>
+			<div class="fb-like"
+				 data-href="https://www.facebook.com/{{ $pageId }}"
+				 data-layout="button"
+				 data-action="like"
+				 data-show-faces="false"
+				 data-share="false"></div>
+			</p>
+		@endif
 	</div>
 </div>
