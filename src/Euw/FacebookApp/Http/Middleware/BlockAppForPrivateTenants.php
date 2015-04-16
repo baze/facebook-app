@@ -25,8 +25,6 @@ class BlockAppForPrivateTenants {
 
 		if ($pageId) {
 
-			$isAdmin = $fb->getPageTabHelper()->isAdmin();
-
 			$tenant = Tenant::where( 'fb_page_id', '=', $pageId )->first();
 
 			if ( ! $tenant ) {
@@ -35,15 +33,13 @@ class BlockAppForPrivateTenants {
 
 			if ( ! $tenant->public ) {
 
-				if ( $isAdmin ) {
-//					dd("you are an admin, you may go on");
-				} else {
-//					dd( "tenant not active. block app." );
+				$isAdmin = $fb->getPageTabHelper()->isAdmin();
+
+				if ( ! $isAdmin ) {
 					throw new TenantIsNotPublicException;
 				}
 
 			}
-
 		}
 
 		return $next($request);
