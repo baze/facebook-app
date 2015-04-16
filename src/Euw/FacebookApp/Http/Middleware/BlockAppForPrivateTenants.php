@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 
-class BlockAppForInactiveTenants {
+class BlockAppForPrivateTenants {
 
 	/**
 	 * Handle an incoming request.
@@ -34,7 +34,7 @@ class BlockAppForInactiveTenants {
 				throw new TenantNotFoundException;
 			}
 
-			if ( ! $tenant->active ) {
+			if ( ! $tenant->public ) {
 
 				if ( $isAdmin ) {
 //					dd("you are an admin, you may go on");
