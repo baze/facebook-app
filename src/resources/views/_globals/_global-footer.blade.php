@@ -15,7 +15,7 @@
 
 	    </div>
 
-		@if(isset($pageId))
+		{{--@if(isset($pageId))
 			<p>
 			<div class="fb-like"
 				 data-href="https://www.facebook.com/{{ $pageId }}"
@@ -24,6 +24,6 @@
 				 data-show-faces="false"
 				 data-share="false"></div>
 			</p>
-		@endif
+		@endif--}}
 	</div>
 </div>
