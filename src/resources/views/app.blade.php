@@ -30,7 +30,9 @@
 <body data-ng-controller="AppController">
     <div id="fb-root"></div>
 
-    @include('facebook-app::_globals/_global-navbar')
+    @if(! isset($hideNavBar))
+        @include('facebook-app::_globals/_global-navbar')
+    @endif
 
     <div class="container-fluid">
         
