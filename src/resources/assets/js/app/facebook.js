@@ -59,9 +59,22 @@ module.exports = function ($rootScope, $window, authService) {
             $rootScope.initialized = true;
         });
 
-        FB.Event.subscribe('edge.create', function (response) {
-            location.reload();
-        });
+        var page_like_or_unlike_callback = function (url, html_element) {
+            //console.log("page_like_or_unlike_callback");
+            //console.log(url);
+            //console.log(html_element);
+
+            var md = new MobileDetect($window.navigator.userAgent);
+
+            if (!md.mobile() && $window.myApp.pageId && $window.myApp.redirectToPageTab) {
+                top.location.href = 'https://www.facebook.com/' + $window.myApp.pageId + '/?sk=app_' + $window.myApp.appId;
+            } else {
+                top.location.reload();
+            }
+        };
+
+        FB.Event.subscribe('edge.create', page_like_or_unlike_callback);
+        FB.Event.subscribe('edge.remove', page_like_or_unlike_callback);
 
         authService.getLoginStatus();
     };
