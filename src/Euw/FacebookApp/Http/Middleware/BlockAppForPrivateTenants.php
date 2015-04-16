@@ -1,8 +1,7 @@
 <?php namespace Euw\FacebookApp\Http\Middleware;
 
 use Closure;
-use Euw\FacebookApp\Exceptions\AppIsNotPublicException;
-use Euw\MultiTenancy\Exceptions\TenantIsNotActiveException;
+use Euw\MultiTenancy\Exceptions\TenantIsNotPublicException;
 use Euw\MultiTenancy\Exceptions\TenantNotFoundException;
 use Euw\MultiTenancy\Modules\Tenants\Models\Tenant;
 use Illuminate\Support\Facades\Config;
@@ -40,7 +39,7 @@ class BlockAppForPrivateTenants {
 //					dd("you are an admin, you may go on");
 				} else {
 //					dd( "tenant not active. block app." );
-					throw new AppIsNotPublicException;
+					throw new TenantIsNotPublicException;
 				}
 
 			}
