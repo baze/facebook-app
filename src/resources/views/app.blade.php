@@ -27,7 +27,7 @@
     {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js') !!}
     <![endif]-->
 </head>
-<body data-ng-controller="AppController">
+<body data-ng-controller="AppController" style="overflow: hidden;">
     <div id="fb-root"></div>
 
     @if(! isset($hideNavBar))
