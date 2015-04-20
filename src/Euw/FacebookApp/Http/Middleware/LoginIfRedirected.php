@@ -34,6 +34,8 @@ class LoginIfRedirected {
 				abort( 403, 'Unauthorized action.' );
 			}
 
+			throw new UserHasDeniedAuthenticationException;
+
 			// User denied the request
 			dd(
 				$helper->getError(),
