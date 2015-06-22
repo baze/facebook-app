@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>{{ isset($texts->brand_title) ? $texts->brand_title : 'Laravel' }}</title>
+    <title>{{ isset($texts->brand_title) ? $texts->brand_title : 'Laravel' }} | {{ isset($page_title) ? $page_title : 'Home' }}</title>
 
     <meta name="description" content="">
     <meta name="HandheldFriendly" content="True">
