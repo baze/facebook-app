@@ -15,6 +15,8 @@
 
 	    </div>
 
+		@include('facebook-app::_partials._ga-tracking')
+
 		{{--@if(isset($pageId))
 			<p>
 			<div class="fb-like"

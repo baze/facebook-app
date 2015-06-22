@@ -1,6 +1,7 @@
 <?php namespace Euw\FacebookApp\Http\Middleware;
 
 use Closure;
+use Euw\FacebookApp\Exceptions\UserHasDeniedAuthenticationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 

@@ -48,6 +48,7 @@ abstract class Controller extends BaseController {
 
         view()->share( 'tenant', $this->tenant );
         view()->share( 'pageId', $this->tenant->fb_page_id );
+        view()->share( 'gaTrackingId', $this->tenant->ga_tracking_id );
         view()->share( 'appName', config( 'euw-facebook-app.appName' ) );
         view()->share( 'texts', $texts );
         view()->share( 'prices', $prices );
